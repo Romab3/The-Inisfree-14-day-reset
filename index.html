@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>The Inisfree Reset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light dark;
+  --cream: #F5F0E8;
+  --cream-deep: #EFE8DC;
+  --cream-deeper: #E8DECC;
+  --charcoal: #1C1C1C;
+  --charcoal-muted: #5C5550;
+  --charcoal-soft: #8A827B;
+  --protea: #B87070;
+  --protea-soft: #D9B5B5;
+  --protea-faint: #EBD4D4;
+  --divider: #DCD2C0;
+  --divider-soft: #E8DFD0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cream: #1B1714;
+    --cream-deep: #251F1B;
+    --cream-deeper: #2F2823;
+    --charcoal: #EFE7D6;
+    --charcoal-muted: #B8AC96;
+    --charcoal-soft: #847866;
+    --protea: #C58A8A;
+    --protea-soft: #6B4040;
+    --protea-faint: #3A2828;
+    --divider: #3D3530;
+    --divider-soft: #2A2421;
+  }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--cream); }
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 22px 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  gap: 16px;
+}
+
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: var(--protea);
+  line-height: 1;
+}
+
+.brand-sub {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--charcoal-soft);
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.header-meta {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--charcoal-soft);
+  text-align: right;
+  font-weight: 700;
+  padding-top: 4px;
+}
+
+.main { flex: 1; opacity: 1; }
+
+/* Progress strip */
+.progress {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 38px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--divider-soft);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.progress-dot {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  font-family: inherit;
+  font-size: 10px;
+  color: var(--charcoal-soft);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--divider);
+  transition: all 0.2s ease;
+}
+
+.progress-dot:hover { border-color: var(--protea-soft); }
+
+.progress-dot.completed {
+  background: var(--protea);
+  color: var(--cream);
+  border-color: var(--protea);
+}
+
+.progress-dot.current {
+  border: 2px solid var(--protea);
+  color: var(--protea);
+  font-weight: 700;
+}
+
+.progress-dot.viewing {
+  outline: 2px solid var(--protea);
+  outline-offset: 3px;
+}
+
+/* Day view */
+.day-eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--protea);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.day-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 500;
+  margin-bottom: 36px;
+  letter-spacing: -0.005em;
+}
+
+.day-section {
+  margin-bottom: 36px;
+}
+
+.day-section-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--charcoal-soft);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* The why - the neuroscience */
+.day-why {
+  background: var(--cream-deeper);
+  border-left: 2px solid var(--protea);
+  padding: 20px 22px;
+  margin-bottom: 36px;
+}
+
+.day-why .day-section-label {
+  color: var(--protea);
+  margin-bottom: 12px;
+}
+
+.day-why-text {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--charcoal);
+}
+
+/* The experiment */
+.day-experiment {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.day-experiment p { margin-bottom: 16px; }
+.day-experiment p:last-child { margin-bottom: 0; }
+.day-experiment ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 18px 0;
+}
+.day-experiment ul li {
+  padding: 6px 0 6px 18px;
+  position: relative;
+  font-size: 15px;
+}
+.day-experiment ul li::before {
+  content: "·";
+  color: var(--protea);
+  position: absolute;
+  left: 4px;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.day-experiment .pullquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--charcoal);
+  padding: 8px 0 8px 18px;
+  border-left: 2px solid var(--protea);
+  margin: 18px 0;
+}
+
+/* Looking back (on reflection days) */
+.looking-back {
+  background: var(--cream-deep);
+  padding: 20px 22px;
+  margin-bottom: 36px;
+  border-radius: 2px;
+}
+
+.looking-back-day {
+  padding: 12px 0;
+  border-top: 1px solid var(--divider-soft);
+}
+
+.looking-back-day:first-child { border-top: none; padding-top: 4px; }
+.looking-back-day:last-child { padding-bottom: 0; }
+
+.looking-back-meta {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--charcoal-soft);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.looking-back-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--charcoal);
+}
+
+.looking-back-text.empty {
+  color: var(--charcoal-soft);
+  font-size: 14px;
+}
+
+/* Voice note (integration days) */
+.voice-note {
+  background: var(--cream-deeper);
+  padding: 22px 24px;
+  margin-bottom: 36px;
+  border-radius: 2px;
+}
+
+.voice-note-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--protea);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.voice-note-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--charcoal);
+}
+
+.voice-note-text p { margin-bottom: 14px; }
+.voice-note-text p:last-child { margin-bottom: 0; }
+
+/* Audio player */
+.voice-note-audio {
+  margin-bottom: 18px;
+}
+
+.voice-note-audio audio {
+  width: 100%;
+  height: 42px;
+  display: block;
+  border-radius: 2px;
+}
+
+/* Some control over Webkit audio player to align with the brand */
+audio::-webkit-media-controls-panel {
+  background-color: var(--cream-deep);
+}
+
+/* Transcript toggle (collapsible when audio is present) */
+.voice-note-transcript-toggle {
+  margin-top: 6px;
+}
+
+.voice-note-transcript-toggle summary {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--charcoal-soft);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px 0;
+  list-style: none;
+  font-family: 'Lato', sans-serif;
+}
+
+.voice-note-transcript-toggle summary::-webkit-details-marker { display: none; }
+.voice-note-transcript-toggle summary::before {
+  content: "+ ";
+  color: var(--protea);
+  font-weight: 700;
+}
+
+.voice-note-transcript-toggle[open] summary::before {
+  content: "− ";
+}
+
+.voice-note-transcript-toggle[open] summary {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--divider-soft);
+}
+
+/* Captures */
+.captures {
+  margin-bottom: 32px;
+}
+
+.capture {
+  margin-bottom: 22px;
+}
+
+.capture-label {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.capture-input,
+.capture-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--divider);
+  background: var(--cream);
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--charcoal);
+  border-radius: 2px;
+  line-height: 1.55;
+}
+
+.capture-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.capture-input:focus,
+.capture-textarea:focus {
+  outline: none;
+  border-color: var(--protea);
+}
+
+.capture-saved {
+  font-size: 11px;
+  color: var(--charcoal-soft);
+  font-style: italic;
+  margin-top: 6px;
+}
+
+/* Actions */
+.day-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--divider-soft);
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 24px;
+  background: var(--charcoal);
+  color: var(--cream);
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 2px;
+  width: 100%;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.btn:hover { background: var(--protea); }
+.btn.ghost {
+  background: transparent;
+  color: var(--charcoal-muted);
+  border: 1px solid var(--divider);
+}
+.btn.ghost:hover {
+  background: transparent;
+  color: var(--charcoal);
+  border-color: var(--charcoal);
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-row .btn { flex: 1; }
+
+.completed-stamp {
+  text-align: center;
+  padding: 16px;
+  background: var(--cream-deep);
+  border-radius: 2px;
+  margin-top: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--charcoal-muted);
+}
+
+.completed-stamp em { color: var(--protea); font-style: normal; font-weight: 700; }
+
+/* Welcome */
+.welcome-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px;
+  line-height: 1.05;
+  font-weight: 500;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.welcome-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: var(--charcoal-muted);
+  line-height: 1.4;
+  margin-bottom: 32px;
+}
+
+.welcome-prose p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* Final / complete view */
+.final-banner {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--cream-deep);
+  border-radius: 2px;
+  margin-bottom: 32px;
+}
+
+.final-eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--protea);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.final-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--charcoal);
+}
+
+/* Modal */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 28, 28, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  z-index: 100;
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-bg { background: rgba(0, 0, 0, 0.7); }
+}
+
+.modal {
+  background: var(--cream);
+  padding: 26px 24px;
+  max-width: 420px;
+  width: 100%;
+  border-radius: 2px;
+  border-top: 3px solid var(--protea);
+}
+
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.modal-text {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+  color: var(--charcoal-muted);
+}
+
+.modal-actions { display: flex; gap: 10px; }
+
+.modal-btn {
+  flex: 1;
+  padding: 11px 16px;
+  background: var(--charcoal);
+  color: var(--cream);
+  border: none;
+  font-family: inherit;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.modal-btn.ghost {
+  background: transparent;
+  color: var(--charcoal-muted);
+  border: 1px solid var(--divider);
+}
+
+/* Footer */
+.footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--divider-soft);
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 11px;
+  color: var(--charcoal-soft);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.footer-link {
+  background: none;
+  border: none;
+  padding: 4px;
+  font-family: inherit;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--charcoal-soft);
+  cursor: pointer;
+}
+
+.footer-link:hover { color: var(--protea); }
+
+/* Mobile */
+@media (max-width: 480px) {
+  .app { padding: 22px 18px 50px; }
+  .day-title { font-size: 30px; }
+  .welcome-title { font-size: 36px; }
+  .welcome-subtitle { font-size: 17px; }
+  .final-text { font-size: 21px; }
+  .day-experiment { font-size: 15.5px; }
+  .capture-label { font-size: 16px; }
+  .progress-dot { width: 20px; height: 20px; font-size: 9px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="header">
+    <div>
+      <div class="brand">Inisfree</div>
+      <span class="brand-sub">The Reset</span>
+    </div>
+    <div class="header-meta" id="header-meta"></div>
+  </header>
+
+  <main class="main" id="main"></main>
+
+  <footer class="footer">
+    <div class="footer-text">14 days of reset, with The Inisfree Collective.</div>
+    <button class="footer-link" id="reset-link">Clear my data</button>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   AUDIO FILES — paths to voice note audio files for Days 7 and 14.
+
+   To add audio:
+   1. Record your voice notes (iPhone Voice Memos exports as .m4a, which
+      works fine in all modern browsers).
+   2. Add them to your GitHub repo in a folder like 'voice-notes/'.
+   3. Update the paths below. The paths are relative to where this
+      HTML file lives.
+
+   Example file structure in your repo:
+     inisfree-reset-program.html
+     voice-notes/
+       day-7.m4a
+       day-14.m4a
+
+   If a path is missing or the file is not uploaded yet, the audio
+   player simply does not appear, and the transcript still shows.
+   ============================================================ */
+
+const AUDIO_FILES = {
+  7: 'voice-notes/day-7.m4a',
+  14: 'voice-notes/day-14.m4a'
+};
+
+/* ============================================================
+   CONFIG — your 14-day Inisfree Reset content.
+   Each day has:
+     title          — the day's name
+     type           — 'experiment', 'reflection', or 'integration'
+     why            — the neuroscience, plain text
+     experiment     — what they actually do (HTML allowed for paragraphs and bullets)
+     captures       — array of { label, type, placeholder } for what they record
+     voiceNote      — only on integration days, paragraphs of text
+     looksBackAt    — array of day numbers to pull captures from (reflection days)
+   ============================================================ */
+
+const DAYS = [
+  {
+    day: 1,
+    title: "Root First, Then Rise",
+    type: "experiment",
+    why: "When we are anxious, burnt out, or just overwhelmed, our nervous system goes into protection mode. That is fight, flight, freeze, or fawn, survival states that are not meant to be permanent. One of the fastest ways to shift back into calm is grounding. Feeling your feet on the floor and taking slow, deep breaths tells your brain that you are safe now. This activates your parasympathetic nervous system, your rest-and-digest state, where clarity and healing happen.",
+    experiment: `<p>Hey you. We are starting.</p>
+<p>Not the kind of start where you have to smash goals or drink 5 litres of celery juice. Just the kind where you remember, you are allowed to be in your body.</p>
+<p>Let us try something:</p>
+<ul>
+  <li>Feet on the floor.</li>
+  <li>3 slow breaths.</li>
+  <li>Hand on your heart if it feels okay.</li>
+</ul>
+<p>Like you are saying: <em>"Hey, I'm here."</em></p>
+<p>That is it. That is today's experiment. Do that grounding breath three times, morning, midday, and before bed. No pressure. No yoga mat. Just presence.</p>
+<p>🌀 Send Roma a 🧘🏽‍♀️ if you tried it, or capture your one-word body status below.</p>`,
+    captures: [
+      { label: "One word for your body status right now", type: "input", placeholder: "tight, settling, foggy, alive..." }
+    ]
+  },
+  {
+    day: 2,
+    title: "Listen to the Signals",
+    type: "experiment",
+    why: "Your body constantly gathers internal data, pain, tension, fluttering, warmth, and sends it to your brain via something called interoception. The better you get at noticing what your body is telling you, the better your emotional regulation, decision-making, and self-care. Listening does not mean fixing. It means making space for the message.",
+    experiment: `<p>Alright, little body detective 👀</p>
+<p>Today, we tune in, not to fix, but to listen.</p>
+<p>Your body has been whispering to you. Maybe yelling. Jaw tight? Shoulders creeping into your ears? That is not a malfunction. That is a message.</p>
+<p>Take a minute. Scan your body. What is loud? What is light? What is saying "no thanks"?</p>
+<p>No fixing. Just noticing. Curiosity over judgement. Every time.</p>
+<p>💬 Text Roma one word or emoji that describes your body vibe today. She'll go first: 🪨 (back like a boulder).</p>`,
+    captures: [
+      { label: "One word or emoji for your body vibe today", type: "input", placeholder: "🪨, scattered, soft, 🫠..." }
+    ]
+  },
+  {
+    day: 3,
+    title: "Move Like You Care",
+    type: "experiment",
+    why: "Movement helps release built-up stress hormones like cortisol and adrenaline. Even five minutes of gentle movement can regulate your nervous system and increase endorphins, those feel-good, pain-reducing chemicals. The key is not intensity, but intention. Move with care, not punishment.",
+    experiment: `<p>Today's vibe? Movement, but make it gentle, messy, and non-performative.</p>
+<p>This is not a "30-day abs challenge." This is a nervous system love note.</p>
+<p>Move for 5 minutes. Wiggle, stretch, walk, dance awkwardly. Try moving like you are on your own team.</p>
+<p>Roma will be over here two-stepping in her kitchen with her baby on her hip. (Did she consent to salsa? No. But she's vibing.)</p>
+<p>🎵 Reply to Roma with your post-move emoji. Or tell her your song of the day.</p>`,
+    captures: [
+      { label: "Your post-move emoji, or your song of the day", type: "input", placeholder: "🌀, 'September' by Earth, Wind & Fire..." }
+    ]
+  },
+  {
+    day: 4,
+    title: "What is Your Body Really Saying?",
+    type: "reflection",
+    why: "Self-awareness grows when we pause and reflect, not just what we did, but how it felt. This day builds somatic curiosity, the foundation of nervous system healing. When you reflect on body signals without judgment, your brain starts to trust your body again.",
+    experiment: `<p>Okay, time for a little regroup to bring all our work together.</p>
+<p>Let us not just do the work. Let us see what it is actually revealing.</p>
+<p>Take your time with the questions below. There are no wrong answers, just information.</p>
+<p>💡 Bonus: If your body had a billboard today, what would it say? Roma's would say: "Hydrate or we riot."</p>
+<p>🎙️ Voice note Roma or text her with your reflections when you are ready.</p>`,
+    looksBackAt: [1, 2, 3],
+    captures: [
+      { label: "What is the loudest signal my body has sent me?", type: "textarea", placeholder: "" },
+      { label: "When did I actually feel okay? Grounded? Even a bit glowy?", type: "textarea", placeholder: "" },
+      { label: "What has surprised me so far?", type: "textarea", placeholder: "" },
+      { label: "What have I discovered about myself so far?", type: "textarea", placeholder: "" },
+      { label: "If my body had a billboard today, it would say...", type: "input", placeholder: "Hydrate or we riot" }
+    ]
+  },
+  {
+    day: 5,
+    title: "Energy Is Your Compass",
+    type: "experiment",
+    why: "Your energy is valuable data. By tracking it, you start to notice patterns, when you feel drained, when you feel alive, and what activities affect it. This builds self-trust and prevents burnout. It is not about doing more, it is about choosing better.",
+    experiment: `<p>Let us talk energy. Not your after-coffee boost, just real aliveness.</p>
+<p>Check in with yourself three times today: morning ☀️, midday 🌤, and evening 🌙.</p>
+<p>At each point, ask: "Energised, flat, or fried?" Then: "What was I doing just before this?"</p>
+<p>No judgement. Just data.</p>
+<p>📊 Send Roma your three-word energy report. Hers yesterday: Tired. Hopeful. Exhausted.</p>`,
+    captures: [
+      { label: "Morning energy", type: "input", placeholder: "energised, flat, fried..." },
+      { label: "Midday energy", type: "input", placeholder: "energised, flat, fried..." },
+      { label: "Evening energy", type: "input", placeholder: "energised, flat, fried..." }
+    ]
+  },
+  {
+    day: 6,
+    title: "Drop One 'Should'",
+    type: "experiment",
+    why: "Chronic stress is not just about being busy, it is about misaligned effort. The shoulds we carry are often internalised expectations rooted in shame or survival. Letting one go creates space for autonomy and restores a sense of agency in your life.",
+    experiment: `<p>Okay. Let us talk about The Shoulds™.</p>
+<p>You know, those joy-sucking obligations you did not vote for.</p>
+<p>Today, drop one "should." Reschedule the thing. Skip the meeting or visit. Leave the group chat (do it).</p>
+<p>If guilt creeps in, tell it: <em>"We are unlearning hustle martyrdom today."</em></p>
+<p>🚫 Text Roma the "should" you dropped, or send her a voice note of what you want to do. She'll cheer for you no matter what.</p>`,
+    captures: [
+      { label: "The 'should' I dropped today", type: "textarea", placeholder: "" }
+    ]
+  },
+  {
+    day: 7,
+    title: "Create a Win That is Yours",
+    type: "integration",
+    why: "Dopamine, your motivation and reward chemical, responds to celebration, not just achievement. When you notice your own progress, especially on your own terms, you build motivation from the inside out. Tiny wins equal neural rewiring for self-belief.",
+    experiment: `<p>This is not about productivity. This is about your definition of success.</p>
+<p>Pick something small and honest:</p>
+<ul>
+  <li>"I fed myself real food."</li>
+  <li>"I asked for help."</li>
+  <li>"I stopped doomscrolling for 5 mins."</li>
+</ul>
+<p>Do it. Celebrate it.</p>
+<p>🎯 Drop your win below. Tiny counts. Roma will send you a virtual standing ovation 🫶🏽</p>`,
+    voiceNote: `<p>Hey, you have made it to Day 7, and Roma wants to take a moment to celebrate that. You have shown up. You have paused. You have learnt to breathe. You have let your body speak, and maybe even moved a little like you cared.</p>
+<p>This week was not about crushing goals or fixing anything. It was about noticing. And noticing is brave.</p>
+<p>If your energy felt up and down, or if some days felt easier than others, good. That means you were present.</p>
+<p>A few things Roma hopes landed for you:</p>
+<p>1. Your body is wise. It tells the truth, even when your mind tries to override it.<br>
+2. Shoulds are heavy. You do not have to carry them.<br>
+3. You are allowed to define your own wins. Even if it is just: "I sat down and took a breath."</p>
+<p>Keep going. Roma is walking with you.</p>`,
+    captures: [
+      { label: "Today's win, tiny counts", type: "textarea", placeholder: "" }
+    ]
+  },
+  {
+    day: 8,
+    title: "What is Worth My Energy?",
+    type: "reflection",
+    why: "Intentional living means aligning your energy with your values. Reflection is the pause that helps you distinguish between urgency and importance. This is nervous system work too, noticing where you are overgiving, and reclaiming where you are most alive.",
+    experiment: `<p>We have been noticing body signals and dropping shoulds. Now let us zoom out and ask: where is my energy actually going?</p>
+<p>⚡ Drop a 💥 to Roma if you are ready to shake things up. Or reply and tell her the one thing you are reclaiming.</p>`,
+    looksBackAt: [5, 6, 7],
+    captures: [
+      { label: "What drained me this week more than it should have?", type: "textarea", placeholder: "" },
+      { label: "What actually lit me up?", type: "textarea", placeholder: "" },
+      { label: "Where am I spending energy that does not align with who I am becoming?", type: "textarea", placeholder: "" },
+      { label: "One thing I am doing next week that actually aligns with my future self", type: "textarea", placeholder: "" }
+    ]
+  },
+  {
+    day: 9,
+    title: "Watch the Voice in Your Head",
+    type: "experiment",
+    why: "Your inner critic is actually a survival mechanism. It shows up to protect you from the sting of shame or rejection. But when you pause and challenge it with gentleness, you shift out of survival mode and engage your prefrontal cortex, the part of your brain wired for clear, rational thinking. With practice, self-compassion does not just feel good, it reshapes your brain, building the pathways for resilience and strength.",
+    experiment: `<p>You know that voice? The one that says "Wow, you really messed that up" after you breathe wrong?</p>
+<p>Today, we spy on her.</p>
+<p>Every time she pipes up, try this: <em>"That is one version of the story. What else could be true?"</em></p>
+<p>Example: "I am lazy." → "I am tired, not lazy."<br>
+"I failed." → "I showed up. That matters."</p>
+<p>🗣️ Text Roma your rewrite today. Let us practice being kinder narrators of our own lives.</p>`,
+    captures: [
+      { label: "What my inner critic said today", type: "textarea", placeholder: "" },
+      { label: "My rewrite, the kinder version", type: "textarea", placeholder: "" }
+    ]
+  },
+  {
+    day: 10,
+    title: "Speak to Yourself Like a Friend",
+    type: "experiment",
+    why: "Research suggests that self-compassionate talk can calm your nervous system, lower cortisol, and increase motivation. The way you speak to yourself during hard moments is one of the stronger predictors of emotional resilience.",
+    experiment: `<p>Imagine your best friend comes to you crying. Would you say: "Honestly, you have brought this on yourself"? No? Then why do we talk to ourselves like that?</p>
+<p>Try this instead: when you are stressed, hand on your heart. Say: <em>"Of course I feel this way. I am doing the best I can."</em></p>
+<p>Feels awkward? That is your brain unlearning shame. Keep going.</p>
+<p>💬 Mirror optional. Eye contact recommended. Voice note Roma how it felt to try this, awkward, soothing, or both.</p>`,
+    captures: [
+      { label: "How it felt to talk to myself like a friend", type: "textarea", placeholder: "awkward, soothing, surprising..." }
+    ]
+  },
+  {
+    day: 11,
+    title: "Let Yourself Be Seen",
+    type: "experiment",
+    why: "Authentic expression can lower stress and is associated with oxytocin release, the bonding hormone. Suppressing your truth, even tiny bits of it, can increase internal stress and disconnection. Today is about practicing truth without performance.",
+    experiment: `<p>Today is a soft stretch. Visibility. Not performative. Not perfect. Just true.</p>
+<p>Choose one thing you have been hiding. A truth. A messy emotion. A bold opinion.</p>
+<p>Then: tell someone. Text it. Say it out loud. Write it. Let yourself be witnessed.</p>
+<p>👀 Want to practice? Drop Roma one tiny truth you are ready to let out.</p>`,
+    captures: [
+      { label: "One tiny truth I let out today", type: "textarea", placeholder: "" }
+    ]
+  },
+  {
+    day: 12,
+    title: "How Has My Voice Changed?",
+    type: "reflection",
+    why: "Self-reflection is what turns insight into real, lasting change. When you take time to pause and notice what is happening, you are moving growth out of the subconscious and into conscious awareness, where it can be repeated, reinforced, and sustained. And this is not just a mental exercise. Reflection creates neurobiological integration: your brain lays down new connections, weaving together thoughts, feelings, and actions in a way that makes change stick.",
+    experiment: `<p>Let us look at how far you have come.</p>
+<p>💡 Compassion is not fluffy. It is fuel.</p>
+<p>🎙️ If you feel like it, voice note Roma one thing that has shifted. She would love to hear your real voice.</p>`,
+    looksBackAt: [9, 10, 11],
+    captures: [
+      { label: "When did I show myself more compassion than usual?", type: "textarea", placeholder: "" },
+      { label: "What critical voice lost some volume?", type: "textarea", placeholder: "" },
+      { label: "What is one moment I chose curiosity over shame?", type: "textarea", placeholder: "" }
+    ]
+  },
+  {
+    day: 13,
+    title: "Future You Is Cheering",
+    type: "experiment",
+    why: "Visualisation is more than daydreaming, it is mental rehearsal for who you are becoming. When you picture your future self offering wisdom and kindness, your brain activates many of the same neural networks as if you were living that experience. This practice does not just make the vision feel more real, it can strengthen belief, build motivation, and prime your brain to notice opportunities that move you closer to what you want.",
+    experiment: `<p>Time for a little time travel 💫</p>
+<p>Imagine you, three months from now. She is wiser. She is bolder. She has better snacks.</p>
+<p>Write or record a message from her to you now. Like:</p>
+<ul>
+  <li>✨ "Thank you for listening to your body."</li>
+  <li>✨ "Please stop people-pleasing. It is draining your sparkle."</li>
+  <li>✨ "More naps. Less proving."</li>
+</ul>
+<p>📩 Text Roma your message from Future You. Let us anchor that vision together.</p>`,
+    captures: [
+      { label: "A message from Future Me to Me Now", type: "textarea", placeholder: "" }
+    ]
+  },
+  {
+    day: 14,
+    title: "Close with Clarity (Not Pressure)",
+    type: "integration",
+    why: "Your brain craves closure. It is how we create meaning and signal to ourselves that progress has been made. That sense of completion builds confidence and makes it easier to follow through on what comes next. Closure does not mean you have to finish everything perfectly. It is about honouring the shift, pausing to acknowledge where you are, and intentionally closing one chapter before stepping into another. When you do this, you create a loop of sustainable growth, momentum without burnout.",
+    experiment: `<p>🎉 YOU. MADE. IT.</p>
+<p>14 days of micro-moves. Not from hustle. From heart.</p>
+<p>This was never about fixing, it was about remembering.</p>
+<p>✨ You do not need a 5-year plan. You need practice. You are already doing it.</p>
+<p>💬 Want to share what is next for you? Roma is right here.</p>`,
+    voiceNote: `<p>Look at you, 14 days of resetting, realigning, and reconnecting. And not in a performative, "look at my transformation" way. In a real, grounded, brave way.</p>
+<p>You listened to your body. You questioned your schedule. You softened the voice in your head. That is not small. That is everything.</p>
+<p>Maybe you had aha moments. Maybe you just felt a tiny bit more human. Either way, it is working.</p>
+<p>So here is the invitation now. You do not have to be perfect. You do not have to keep "doing" the program. Just ask, every few days:</p>
+<p>🌱 "What do I need?"<br>
+🌸 "What matters most?"<br>
+💖 "How can I speak to myself with more kindness?"</p>
+<p>You have reset. You are more rooted. And from here, you rise.</p>
+<p>Roma is proud of you. She hopes you are too.</p>`,
+    captures: [
+      { label: "What part of this reset felt like coming home?", type: "textarea", placeholder: "" },
+      { label: "What shifted in how I treat my body, my time, my inner voice?", type: "textarea", placeholder: "" },
+      { label: "One ritual I want to keep. Just one.", type: "textarea", placeholder: "" }
+    ]
+  }
+];
+
+/* ============================================================
+   STORAGE & STATE
+   ============================================================ */
+
+const STORAGE_KEY = 'inisfree:reset-program';
+
+let state = {
+  name: null,
+  startedAt: null,
+  captures: {},      // key: "day{n}_q{i}", value: text
+  completions: {}    // key: day number, value: ISO timestamp
+};
+
+let viewingDay = 1;
+let onWelcome = false;
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      state.name = parsed.name || null;
+      state.startedAt = parsed.startedAt || null;
+      state.captures = parsed.captures || {};
+      state.completions = parsed.completions || {};
+    }
+  } catch (e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+}
+
+function clearAll() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  state = { name: null, startedAt: null, captures: {}, completions: {} };
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+
+function escapeHtml(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function currentDayNumber() {
+  // Highest completed day + 1, capped at 14
+  let max = 0;
+  for (const k in state.completions) {
+    const n = parseInt(k);
+    if (n > max) max = n;
+  }
+  return Math.min(14, max + 1);
+}
+
+function isDayCompleted(dayNum) {
+  return !!state.completions[dayNum];
+}
+
+function captureKey(dayNum, qIndex) {
+  return `day${dayNum}_q${qIndex}`;
+}
+
+function getCapture(dayNum, qIndex) {
+  return state.captures[captureKey(dayNum, qIndex)] || '';
+}
+
+function setCapture(dayNum, qIndex, value) {
+  state.captures[captureKey(dayNum, qIndex)] = value;
+  saveState();
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+
+function daysSinceStart() {
+  if (!state.startedAt) return 0;
+  return Math.floor((Date.now() - new Date(state.startedAt).getTime()) / 86400000);
+}
+
+/* ============================================================
+   VIEWS
+   ============================================================ */
+
+function renderHtml(html) {
+  document.getElementById('main').innerHTML = html;
+}
+
+function renderHeaderMeta() {
+  const meta = document.getElementById('header-meta');
+  if (!state.name || onWelcome) {
+    meta.innerHTML = '';
+    return;
+  }
+  const elapsed = daysSinceStart();
+  const dayLabel = elapsed === 0 ? 'Day 1' : `Day ${Math.min(14, elapsed + 1)} of 14`;
+  meta.innerHTML = dayLabel;
+}
+
+function viewWelcome() {
+  return `
+    <section>
+      <div class="day-eyebrow">Welcome to The Inisfree Reset</div>
+      <h1 class="welcome-title">14 days. Soft, and on purpose.</h1>
+      <p class="welcome-subtitle">Not a transformation. A remembering.</p>
+
+      <div class="welcome-prose">
+        <p>This is a fourteen-day reset designed to bring you back into your body, your energy, and your own voice. Each day takes around five to ten minutes, and you can move through it at your own pace.</p>
+        <p>Each day has two parts: the why, which is the neuroscience underneath the practice, and the experiment, which is what you actually try. On reflection days, you will see what you have captured on earlier days, woven back to you.</p>
+        <p>What you write here is private to your browser. Roma is still on the other side of every "text me", whenever you want to share.</p>
+      </div>
+
+      <div class="capture" style="margin-top:32px;">
+        <label class="capture-label" for="name-input">What should we call you?</label>
+        <input type="text" class="capture-input" id="name-input" placeholder="Your first name" autocomplete="given-name">
+      </div>
+
+      <div class="day-actions">
+        <button class="btn" id="welcome-start">Begin Day 1</button>
+      </div>
+    </section>
+  `;
+}
+
+function viewDay(dayNum) {
+  const d = DAYS[dayNum - 1];
+  if (!d) return viewWelcome();
+
+  const completed = isDayCompleted(dayNum);
+  const typeLabel = d.type === 'reflection' ? 'Reflection' : (d.type === 'integration' ? 'Integration' : 'Experiment');
+
+  // Looking back (reflection days)
+  let lookingBackHtml = '';
+  if (d.looksBackAt && d.looksBackAt.length > 0) {
+    const lookingBackBlocks = d.looksBackAt.map(refDay => {
+      const refData = DAYS[refDay - 1];
+      if (!refData) return '';
+      // Collect non-empty captures from that day
+      const captures = (refData.captures || []).map((cap, i) => getCapture(refDay, i)).filter(v => v && v.trim());
+      const captureText = captures.length > 0 ? captures.join(' · ') : '';
+      return `
+        <div class="looking-back-day">
+          <div class="looking-back-meta">Day ${refDay} · ${escapeHtml(refData.title)}</div>
+          <div class="looking-back-text${captureText ? '' : ' empty'}">${captureText ? escapeHtml(captureText) : 'Nothing captured on this day.'}</div>
+        </div>
+      `;
+    }).join('');
+    lookingBackHtml = `
+      <div class="looking-back">
+        <div class="day-section-label" style="margin-bottom:14px;">Looking back</div>
+        ${lookingBackBlocks}
+      </div>
+    `;
+  }
+
+  // Voice note (integration days)
+  let voiceNoteHtml = '';
+  if (d.voiceNote) {
+    const audioPath = AUDIO_FILES[dayNum];
+    const audioHtml = audioPath ? `
+      <div class="voice-note-audio">
+        <audio controls preload="metadata" playsinline data-audio-day="${dayNum}">
+          <source src="${escapeHtml(audioPath)}">
+          Your browser does not support audio playback.
+        </audio>
+      </div>
+    ` : '';
+    const transcriptLabel = audioPath ? 'Transcript' : '';
+    const transcriptHtml = audioPath
+      ? `<details class="voice-note-transcript-toggle"><summary>If you'd rather read</summary><div class="voice-note-text">${d.voiceNote}</div></details>`
+      : `<div class="voice-note-text">${d.voiceNote}</div>`;
+    voiceNoteHtml = `
+      <div class="voice-note">
+        <div class="voice-note-label">A voice note from Roma</div>
+        ${audioHtml}
+        ${transcriptHtml}
+      </div>
+    `;
+  }
+
+  // Captures
+  const capturesHtml = (d.captures || []).map((cap, i) => {
+    const val = getCapture(dayNum, i);
+    const input = cap.type === 'textarea'
+      ? `<textarea class="capture-textarea" data-day="${dayNum}" data-q="${i}" placeholder="${escapeHtml(cap.placeholder || '')}">${escapeHtml(val)}</textarea>`
+      : `<input type="text" class="capture-input" data-day="${dayNum}" data-q="${i}" placeholder="${escapeHtml(cap.placeholder || '')}" value="${escapeHtml(val)}">`;
+    return `
+      <div class="capture">
+        <label class="capture-label">${escapeHtml(cap.label)}</label>
+        ${input}
+      </div>
+    `;
+  }).join('');
+
+  // Actions
+  let actionsHtml;
+  if (completed) {
+    actionsHtml = `
+      <div class="completed-stamp">
+        <em>Completed</em> on ${escapeHtml(fmtDate(state.completions[dayNum]))}. Your captures are saved as you type.
+      </div>
+      <div class="btn-row">
+        ${dayNum > 1 ? `<button class="btn ghost" data-go-day="${dayNum - 1}">Day ${dayNum - 1}</button>` : ''}
+        ${dayNum < 14 ? `<button class="btn" data-go-day="${dayNum + 1}">${dayNum + 1 === 14 ? 'Day 14' : `Day ${dayNum + 1}`}</button>` : `<button class="btn" id="see-finale">See the finale</button>`}
+      </div>
+    `;
+  } else {
+    actionsHtml = `
+      <button class="btn" id="mark-complete" data-day="${dayNum}">Mark Day ${dayNum} complete</button>
+      ${dayNum > 1 ? `<button class="btn ghost" data-go-day="${dayNum - 1}">Back to Day ${dayNum - 1}</button>` : ''}
+    `;
+  }
+
+  return `
+    <section>
+      ${renderProgressStrip(dayNum)}
+      <div class="day-eyebrow">Day ${dayNum} · ${escapeHtml(typeLabel)}</div>
+      <h1 class="day-title">${escapeHtml(d.title)}</h1>
+
+      <div class="day-why">
+        <div class="day-section-label">The why</div>
+        <div class="day-why-text">${escapeHtml(d.why)}</div>
+      </div>
+
+      ${voiceNoteHtml}
+      ${lookingBackHtml}
+
+      <div class="day-section">
+        <div class="day-section-label">Today's experiment</div>
+        <div class="day-experiment">${d.experiment}</div>
+      </div>
+
+      <div class="captures">
+        ${capturesHtml}
+      </div>
+
+      <div class="day-actions">
+        ${actionsHtml}
+      </div>
+    </section>
+  `;
+}
+
+function renderProgressStrip(currentlyViewing) {
+  const dots = [];
+  const currentDay = currentDayNumber();
+  for (let i = 1; i <= 14; i++) {
+    const classes = ['progress-dot'];
+    if (isDayCompleted(i)) classes.push('completed');
+    else if (i === currentDay) classes.push('current');
+    if (i === currentlyViewing) classes.push('viewing');
+    dots.push(`<button class="${classes.join(' ')}" data-go-day="${i}" aria-label="Day ${i}">${i}</button>`);
+  }
+  return `<nav class="progress">${dots.join('')}</nav>`;
+}
+
+function viewFinale() {
+  const ritual = getCapture(14, 2);
+  const homeText = getCapture(14, 0);
+
+  return `
+    <section>
+      ${renderProgressStrip(14)}
+      <div class="final-banner">
+        <div class="final-eyebrow">You have arrived</div>
+        <div class="final-text">14 days, ${escapeHtml(state.name || 'friend')}. You showed up.</div>
+      </div>
+
+      <div class="welcome-prose">
+        <p>Roma's invitation now: you do not have to be perfect. You do not have to keep doing the program. Just ask, every few days, what do I need, what matters most, how can I speak to myself with more kindness.</p>
+        ${ritual ? `<p>The ritual you said you want to keep: <em style="font-family:'Cormorant Garamond', serif; font-size:18px;">${escapeHtml(ritual)}</em></p>` : ''}
+        ${homeText ? `<p>What felt like coming home: <em style="font-family:'Cormorant Garamond', serif; font-size:18px;">${escapeHtml(homeText)}</em></p>` : ''}
+      </div>
+
+      <div class="day-actions">
+        <button class="btn ghost" data-go-day="14">Re-read Day 14</button>
+        <button class="btn ghost" data-go-day="1">Start a re-read from Day 1</button>
+      </div>
+    </section>
+  `;
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+
+let showingFinale = false;
+
+function render() {
+  renderHeaderMeta();
+  if (onWelcome || !state.name) {
+    onWelcome = true;
+    renderHtml(viewWelcome());
+    attachWelcomeHandlers();
+    return;
+  }
+  if (showingFinale) {
+    renderHtml(viewFinale());
+    attachDayHandlers();
+    return;
+  }
+  renderHtml(viewDay(viewingDay));
+  attachDayHandlers();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function attachWelcomeHandlers() {
+  const input = document.getElementById('name-input');
+  const btn = document.getElementById('welcome-start');
+  setTimeout(() => input && input.focus(), 50);
+
+  const start = () => {
+    const name = input.value.trim();
+    if (!name) { input.focus(); return; }
+    state.name = name;
+    state.startedAt = new Date().toISOString();
+    saveState();
+    onWelcome = false;
+    viewingDay = currentDayNumber();
+    render();
+  };
+
+  if (btn) btn.onclick = start;
+  if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') start(); });
+}
+
+function attachDayHandlers() {
+  // Audio error handling — if a voice note audio file fails to load,
+  // hide the player and open the transcript so the user still gets the content.
+  document.querySelectorAll('audio[data-audio-day]').forEach(audioEl => {
+    audioEl.addEventListener('error', () => {
+      const container = audioEl.closest('.voice-note-audio');
+      if (container) container.style.display = 'none';
+      const transcript = container && container.parentElement
+        ? container.parentElement.querySelector('.voice-note-transcript-toggle')
+        : null;
+      if (transcript) transcript.open = true;
+    });
+  });
+
+  // Progress dots and navigation buttons
+  document.querySelectorAll('[data-go-day]').forEach(el => {
+    el.onclick = () => {
+      const target = parseInt(el.dataset.goDay);
+      if (target >= 1 && target <= 14) {
+        viewingDay = target;
+        showingFinale = false;
+        render();
+      }
+    };
+  });
+
+  // Auto-save captures on input
+  document.querySelectorAll('[data-day][data-q]').forEach(el => {
+    el.addEventListener('input', () => {
+      const day = parseInt(el.dataset.day);
+      const q = parseInt(el.dataset.q);
+      setCapture(day, q, el.value);
+    });
+  });
+
+  // Mark complete
+  const markBtn = document.getElementById('mark-complete');
+  if (markBtn) {
+    markBtn.onclick = () => {
+      const day = parseInt(markBtn.dataset.day);
+      state.completions[day] = new Date().toISOString();
+      saveState();
+      if (day === 14) {
+        showingFinale = true;
+        render();
+      } else {
+        viewingDay = day + 1;
+        render();
+      }
+    };
+  }
+
+  // See the finale (Day 14 already completed)
+  const finaleBtn = document.getElementById('see-finale');
+  if (finaleBtn) {
+    finaleBtn.onclick = () => {
+      showingFinale = true;
+      render();
+    };
+  }
+}
+
+/* ============================================================
+   RESET DIALOG
+   ============================================================ */
+
+function showResetDialog() {
+  if (document.querySelector('.modal-bg')) return;
+  const modal = document.createElement('div');
+  modal.className = 'modal-bg';
+  modal.innerHTML = `
+    <div class="modal">
+      <div class="modal-title">Clear all your reset data?</div>
+      <div class="modal-text">This will remove your name, your captures, and your progress through the 14 days from this browser. It cannot be undone.</div>
+      <div class="modal-actions">
+        <button class="modal-btn ghost" id="cancel-clear">Cancel</button>
+        <button class="modal-btn" id="confirm-clear">Clear it</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  document.getElementById('cancel-clear').onclick = () => modal.remove();
+  modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  document.getElementById('confirm-clear').onclick = () => {
+    clearAll();
+    modal.remove();
+    onWelcome = true;
+    viewingDay = 1;
+    showingFinale = false;
+    render();
+  };
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+
+document.getElementById('reset-link').onclick = showResetDialog;
+
+loadState();
+if (!state.name) {
+  onWelcome = true;
+} else {
+  viewingDay = currentDayNumber();
+}
+render();
+</script>
+
+</body>
+</html>
